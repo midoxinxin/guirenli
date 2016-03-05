@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,minimal-ui">
+    <meta http-equiv="expires" content="-1"><!--网页到期时间,-1表示立即过期，防止重复提交-->
+
+    <title>贵人礼枪炮玫瑰</title>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/jquery-2.1.4.js" type="text/javascript"></script>
+
+<script>
+</script>
+
+</head>
+
+<body>
+<header><img src="images/title.png" alt="title"></header>
+<div id="top">
+	<img src="images/diamond.png" width="6.4%" alt="diamond"/><span id="totalAmount">1000</span>
+	<span class="btn">
+		<button class="friend"></button>
+	</span>
+	<span class="btn">
+		<button class="focus"></button>
+	</span>
+</div>
+
+<div id="content">
+	<div class="first">
+		<div id="Sh">
+			<img src="images/sh.png" alt="Sh" class="city"><br/>
+			<button id="searchPotions"></button>
+		</div>
+		<div id="Paris">
+			<img src="images/paris.png" alt="Paris" class="city"><br/>
+			<button id="searchMagicWand"></button>			
+		</div>
+	</div>
+	<div class="second">
+		<div id="guiRenLi">
+			<img src="images/guirenli.png" alt="guiRenLi" class="city"><br/>
+			<button id="searchRose"></button>
+		</div>
+		<div id="NewYork">
+			<img src="images/newyork.png" alt="NewYork" class="city"><br/>
+			<button id="searchGift"></button>			
+		</div>	
+	</div>					
+</div>
+
+<footer>
+	<ul id="count">
+		<li>
+			<img src="images/potionA.png" alt="potion"/><span id="potion">0</span>
+		</li>
+		<li>
+			<img src="images/roseA.png" alt="rose"/><span id="rose">0</span>
+		</li>
+		<li>
+			<img src="images/magicWandA.png" alt="magicWand"/><span id="magicWand">0</span>
+		</li>
+		<li>
+			<img src="images/giftA.png" alt="gift"/><span id="gift">0</span>
+		</li>				
+	</ul>
+	<button id="exchange"></button>	
+</footer>
+
+<!-- **********************以下需用JS加入********************** -->
+<!-- ***********遮罩层*********** -->
+<div class="mask none" ></div>
+
+<!-- *********关注界面******** -->
+<div id="focusView" class="none">
+	<img src="images/title2.png" alt="title2" class="title2"/>
+	<img src='images/wm.jpg' alt="2wm" class="wm" />
+	<p>长按二维码，关注“贵人礼”<br/>
+	   可得<img src="images/diamond.png" alt="diamond" class="diamond">500</p>
+</div>
+
+<!-- *********邀请好友界面******** -->
+<div id="friendView" class="none">
+	<img src="images/row.png" alt="row" class="row" />
+	<img src="images/friendView.png" alt="friendView"/>
+</div>
+
+<!-- *********搜索界面******** -->
+<!-- 魔石不够界面********* -->
+<div id="search0View" class="none">
+	<div>
+		<img src="images/nodiam.png" alt="nodiam">		
+		<button class="focus"></button>
+		<button class="friend"></button>
+	</div>
+</div>
+
+<!-- 魔石足够界面********* -->
+<div id="search1View" class="none">
+	<!-- loading: -->
+	<div class="none loading">
+	 	<!-- 绝对定位 --><!-- z-index:1002; -->
+		<img src="images/title1.png" alt="loading" class="title1"/>          
+		<img src="images/loading0.png" alt="loading" class="loading0"/> 
+		<img src="images/loading1.png" alt="loading" class="loading1"/>  
+		<img src="images/0.png" alt="loading" class="percent0"/>  
+		<img src="images/100.png" alt="loading" class="percent100"/>  
+	</div>
+	<!-- 获得奖品： -->
+	<div class="none get1">	
+		<img src="images/get.png" alt="not1" class="get"/> 
+		<img src="images/potion.png" alt="potion"/><br/>
+		<button></button>
+	</div>
+	<!-- 失败： -->
+	<div class="none not1">
+		<img src="images/not.png" alt="get1" class="not"/> 
+		<button></button>
+	</div>
+</div>
+
+<div id="search2View" class="none">
+	<!-- loading: -->
+	<div class="none loading">
+	 	<!-- 绝对定位 --><!-- z-index:1002; -->
+		<img src="images/title1.png" alt="loading" class="title1"/>          
+		<img src="images/loading0.png" alt="loading" class="loading0"/> 
+		<img src="images/loading1.png" alt="loading" class="loading1"/>  
+		<img src="images/0.png" alt="loading" class="percent0"/>  
+		<img src="images/100.png" alt="loading" class="percent100"/>  
+	</div>
+	<!-- 获得奖品： -->
+	<div class="none get2">	
+		<img src="images/get.png" alt="not2" class="get"/> 
+		<img src="images/rose.png" alt="rose"/><br/>
+		<button></button>
+	</div>
+	<!-- 失败： -->
+	<div class="none not2">
+		<img src="images/not.png" alt="get2" class="not"/> 
+		<button></button>
+	</div>
+</div>
+
+<div id="search3View" class="none">
+	<!-- loading: -->
+	<div class="none loading">
+	 	<!-- 绝对定位 --><!-- z-index:1002; -->
+		<img src="images/title1.png" alt="loading" class="title1"/>          
+		<img src="images/loading0.png" alt="loading" class="loading0"/> 
+		<img src="images/loading1.png" alt="loading" class="loading1"/>  
+		<img src="images/0.png" alt="loading" class="percent0"/>  
+		<img src="images/100.png" alt="loading" class="percent100"/>  
+	</div>
+	<!-- 获得奖品： -->
+	<div class="none get3">	
+		<img src="images/get.png" alt="not3" class="get"/> 
+		<img src="images/magicWand.png" alt="magicWand"/><br/>
+		<button></button>
+	</div>
+	<!-- 失败： -->
+	<div class="none not3">
+		<img src="images/not.png" alt="get3" class="not"/> 
+		<button></button>
+	</div>
+</div>
+
+<div id="search4View" class="none">
+	<!-- loading: -->
+	<div class="none loading">
+	 	<!-- 绝对定位 --><!-- z-index:1002; -->
+		<img src="images/title1.png" alt="loading" class="title1"/>          
+		<img src="images/loading0.png" alt="loading" class="loading0"/> 
+		<img src="images/loading1.png" alt="loading" class="loading1"/>  
+		<img src="images/0.png" alt="loading" class="percent0"/>  
+		<img src="images/100.png" alt="loading" class="percent100"/>  
+	</div>
+	<!-- 获得奖品： -->
+	<div class="none get4">	
+		<img src="images/get.png" alt="not4" class="get"/> 
+		<img src="images/gift.png" alt="gift"/><br/>
+		<button></button>
+	</div>
+	<!-- 失败： -->
+	<div class="none not4">
+		<img src="images/not.png" alt="get4" class="not"/> 
+		<button></button>
+	</div>
+</div>
+
+<!-- *********兑换枪炮玫瑰界面******** -->
+<!-- 兑换玫瑰规则界面 -->
+<div id="exchangeRule" class="none">
+	<div class="exContent">
+		<div id="rose1">
+			<img src="images/rose1.png" alt="rose1" class="rose1">
+			<p class="pTitle">集齐3种物品可领取<br/>玫瑰一只</p>
+			<p class="pCon">物品1<img src="images/potion.png" alt="potion"/></p>
+			<p class="pCon">物品2<img src="images/rose.png" alt="rose"/></p>
+			<p class="pCon">物品3<img src="images/magicWand.png" alt="magicWand"/></p><br/>
+			<a href="https://www.baidu.com/"><button></button></a>   <!-- 商城链接？？？ -->
+		</div>
+		<div id="roses">
+			<img src="images/roses.png" alt="roses" class="roses">
+			<p class="pTitle">集齐4种物品可领取<br/>玫瑰一束</p>
+			<p class="pCon">物品1<img src="images/potion.png" alt="potion"/></p>
+			<p class="pCon">物品2<img src="images/rose.png" alt="rose"/></p>
+			<p class="pCon">物品3<img src="images/magicWand.png" alt="magicWand"/></p>
+			<p class="pCon">物品4<img src="images/gift.png" alt="gift"/><br/></p>
+			<a href="https://www.baidu.com/"><button></button></a>   <!-- 商城链接？？？ -->
+		</div>		
+	</div>
+</div>
+<!-- 兑换1支玫瑰界面 -->
+<div id="exchangeRose1" class="none">
+	<div>
+		<img src="images/ex1.png" alt="ex1">
+		<button  class='yes'></button>
+		<button class='no'></button>
+	</div>
+</div>
+<!-- 领取一支玫瑰界面 -->
+<div id='exchangeView1' class="none">
+	<p class="tip">留下您的收货信息,我们会很快为您发放礼品</p>
+	<form action='process_form1.php' method='post'>              
+        <section> 
+            <label for='user_name'>姓名</label>
+            <input type='text' class='user_name' name='user_name' />                           
+        </section>              
+        <section> 
+            <label for='phone'>手机</label> 
+            <input type='text' class='phone' name='phone' />                           
+        </section>        
+        <section> 
+            <label for='address'>收货地址</label>
+            <input type='text' class='address' name='address' placeholder='领取地址：高新区锦业二路六和园' />                           
+        </section>             
+        <section> 
+            <label for='postcode'>邮编</label>
+            <input type='text' class ='postcode' name='postcode' />                           
+        </section>   
+        <section> 
+            <input type='submit' value=' ' />
+        </section>
+    </form>	
+    <div class="middle">
+		<p class="phone">客服电话：400-000-1111</p>
+		<p>西安地区以外的，需承担运费15元</p>
+		<p>西安地区可上门领取，也可选择同城快递</p>
+		<p>这收货地址内备注</p>
+	</div>
+	<div class='bottom'>
+		<img src="images/grlLogo.png" alt="logo" class="logo"/>
+		<div class="download">
+			<p>下载贵人礼APP，赢取更多好礼</p>
+			<button><a href="#"></a></button>
+		</div>
+	</div>
+</div>
+<!-- 领取一束玫瑰界面 -->
+<div id='exchangeView2' class="none">
+	<p class="tip">留下您的收货信息,我们会很快为您发放礼品</p>
+<<<<<<< .mine
+<<<<<<< .mine
+	<form action='process_form.php' method='post'>              
+=======
+	<form action='../../process_form.php' method='post'>              
+=======
+	<form action='process_form.php' method='post'>              
+>>>>>>> .r392
+>>>>>>> .r349
+        <section> 
+            <label for='user_name'>姓名</label>
+            <input type='text' class='user_name' name='user_name' />                           
+        </section>              
+        <section> 
+            <label for='phone'>手机</label> 
+            <input type='text' class='phone' name='phone' />                           
+        </section>        
+        <section> 
+            <label for='address'>收货地址</label>
+            <input type='text' class='address' name='address' placeholder='领取地址：高新区锦业二路六和园' />                           
+        </section>             
+        <section> 
+            <label for='postcode'>邮编</label>
+            <input type='text' class='postcode' name='postcode' />                           
+        </section>   
+        <section> 
+            <input type='submit' value=' '/>
+        </section>
+    </form>	
+    <div class="middle">
+		<p class="phone">客服电话：400-000-1111</p>
+		<p>西安地区以外的，需承担运费15元</p>
+		<p>(西安地区可上门领取，也可选择同城快递)</p>
+	</div>
+	<div class='bottom'>
+		<img src="images/guirenli.png" alt="logo" class="logo"/>
+		<div class="download">
+			<p>下载贵人礼APP，领取更多好礼</p>
+			<a href="#"><button></button></a>
+		</div>
+	</div>
+</div>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
+
+<!-- 获取用户ip -->
+
+ <?php
+    $hostname = SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT;
+    $dbuser = SAE_MYSQL_USER;
+    $dbpass = SAE_MYSQL_PASS;
+    $dbname = SAE_MYSQL_DB;
+    $link = mysql_connect($hostname, $dbuser, $dbpass);
+        if (!$link) {
+            die('Could not connect: ' . mysql_error());
+        }
+        //echo 'Connected successfully<br/>';
+        //select db
+        mysql_select_db($dbname, $link) or die ('Can\'t use dbname : ' . mysql_error());
+        //echo 'Select db '.$dbname.' successfully';
+        mysql_close($link);
+
+$mysql = new SaeMysql();
+
+function getIP(){
+    global $ip;
+    if (getenv("HTTP_CLIENT_IP"))
+    $ip = getenv("HTTP_CLIENT_IP");
+    else if(getenv("HTTP_X_FORWARDED_FOR"))
+    $ip = getenv("HTTP_X_FORWARDED_FOR");
+        else if(getenv("REMOTE_ADDR"))
+        $ip = getenv("REMOTE_ADDR");
+        else $ip = "Unknow";
+        return $ip;
+        }
+// 使用方法：
+ 
+//$timestamp = date("y-m-d h:i:s",time()); 
+$ip =getIP();
+//echo getIP();
+
+$sql= "insert into ordersip (TIMESTAMP,ip) values
+            ('".date('Y-m-d H:i:s')."', '".$ip."')";
+
+
+  $result = $mysql->runSql($sql);
+  
+
+  $mysql->closeDb();
+   if ($result) {
+//echo "<table class=\"table table-striped\"><tr>
+ //<td class=\"info\"> ".$db->affected_rows."ip inserted into database</td></tr></table>";
+ } else {
+    
+ //echo "<table class=\"table table-striped\"><tr>
+  //<td class=\"info\">An error has occurred. The item can not be repeated.</td></tr></table>";
+  }
+
+ ?>
+<!--   ==================================end========================================== -->
+
+
+
+<!-- 返回指定用户ip -->
+<?php
+
+  @ $db = new SaeMysql("SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS,app_rose111");
+
+  if (mysqli_connect_errno()) {
+     echo 'Error: Could not connect to database.  Please try again later.';
+     exit;
+  }
+  $value=8; //测试是第8位
+    $sql = "select * from ordersip where orderid like '%".$value."%'";
+ //$sql="select * from table1 where field1 like ’%value1%’ ";
+  //$sql = "select * from  ordersip limit 6,1 ";
+
+  $result = $db->getData($sql);
+  if($result){
+    
+        foreach($result as $small){
+            $ip = $answer.$small['ip']; //获取符合搜索要求的记录的字段
+            $orderid = $answer.$small['orderid'];
+            echo $ip;
+            echo"<br/>";
+            echo $orderid;
+          }
+   }
+ ?>
+
+
+<!--php返回对象ip -->
+ <script>
+    
+ var b=<?php echo $orderid; ?>
+
+ alert (b);  //b为返回的用户id(第几位用户)
+ </script>
+<!--   ========================================end==================================== -->
+
+
+
+
+
+<!-- 微信分享朋友圈/好友事件 -->
+<!-- JSSDK的调用实例 -->
+<?php
+require_once "jssdk.php"; //引入JSSDK
+//"../jssdk/jssdk.php"; 表示主机根目录下jssdk文件夹内jssdk.php文件
+
+// 这里的参数需要替换！AppID和AppSecret？？？********************************
+$jssdk = new JSSDK("wx4ce09cd5c0dcf672", "88fdba0dd51778cde7904e7d7fd9c962");//填写开发者中心你的开发者ID
+$signPackage = $jssdk->GetSignPackage(); //调用方法来执行验证
+?>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+  // 通过config接口注入权限验证配置
+  wx.config({ // 这里的参数无需替换！！！
+    debug: false,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，（若很熟悉，则不用开启调试模式，设为false）
+                // 若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    appId: '<?php echo $signPackage["appId"];?>', //公众号的唯一标识
+    timestamp: <?php echo $signPackage["timestamp"];?>, //生成签名的时间戳--->系统自己生成的时间戳
+    nonceStr: '<?php echo $signPackage["nonceStr"];?>', //生成签名的随机串
+    signature: '<?php echo $signPackage["signature"];?>', //签名，见附录1
+    jsApiList: [   //需要使用的网页服务接口,所有要调用的 API 都要加到这个列表中
+      'onMenuShareTimeline',
+      'onMenuShareAppMessage'
+    ]
+  }); //debug为true时，弹出{"errMsg":"config:ok"} 说明Config的配置没有问题
+
+  //ready函数用于调用API，如果你的网页在加载后就需要自定义分享和回调功能，需要在此调用分享函数。
+  //如果是微信游戏结束后，需要点击按钮触发得到分值后分享，这里就不需要调用API了，可以在按钮上绑定事件直接调用。
+  //因此，微信游戏由于大多需要用户先触发获取分值，此处请不要填写如下所示的分享API
+  wx.ready(function () {
+      // 分享到朋友圈
+      wx.onMenuShareTimeline({
+        title: '情人节 厄瓜多尔玫瑰免费抢！', 
+        link: 'http://rose111.applinzi.com/guirenli/index.php', // 分享链接？？？
+        imgUrl: 'http://rose111.applinzi.com/guirenli/images/111.png', // 分享图标
+        success: function () {
+             totalAmount += 500;        
+             View.saveStorage(5,totalAmount);
+             countTotalAmount.text(totalAmount);
+        },
+        cancel: function () { 
+            // alert("分享失败");
+        }
+      });
+      //分享给朋友
+      wx.onMenuShareAppMessage({
+        title: '情人节 厄瓜多尔玫瑰免费抢！', 
+        desc: '贵人礼 有情有义的礼物艺术家', // 分享描述
+        link: 'http://rose111.applinzi.com/guirenli/index.php', // 分享链接？？？
+        imgUrl: 'http://rose111.applinzi.com/guirenli/images/111.png',
+        type: '', // 分享类型,music、video或link，不填默认为link
+        success: function () { 
+              totalAmount+=200;        
+              View.saveStorage(5,totalAmount);
+              countTotalAmount.text(totalAmount);
+        },
+        cancel: function () { 
+            // alert("分享失败");
+        }
+      });
+  });
+
+</script>
+<!--   ========================================end==================================== -->
+
+<?php 
+
+require_once "subscribe.php";
+
+ echo $sub;
+?>

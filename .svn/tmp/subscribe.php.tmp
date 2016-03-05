@@ -1,0 +1,99 @@
+<html>
+<script src="js/jquery-2.1.4.js" type="text/javascript"></script>
+    <script src="js/app.js"></script>
+
+
+<?php
+
+/*** wechat php test */
+
+//define your token
+
+define("TOKEN", "weixin");
+$wechatObj = new wechatCallbackapiTest();
+ 
+ if (isset($_GET['echostr'])) {
+     //$wechatObj->valid();
+ }else{
+     $wechatObj->responseMsg();
+ }
+
+
+
+class wechatCallbackapiTest{
+
+    private function checkSignature()
+    {
+        $signature = $_GET["signature"];
+        $timestamp = $_GET["timestamp"];
+        $nonce = $_GET["nonce"];    
+                
+        $token = TOKEN;
+        $tmpArr = array($token, $timestamp, $nonce);
+        sort($tmpArr);
+        $tmpStr = implode( $tmpArr );
+        $tmpStr = sha1( $tmpStr );
+        
+        if( $tmpStr == $signature ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function responseMsg(){
+    //     {
+         $postArr= $GLOBALS['HTTP_RAW_POST_DATA'];
+         $postObj=simplexml_load_string($postArr);
+         global $sub;
+         $sub=strtolower($postObj->Event == 'subscribe');
+                 if(strtolower($postObj->MsgType)=='event')
+
+               {   //$sub=strtolower($postObj->Event == 'subscribe');
+
+                if(strtolower($postObj->Event == 'subscribe'))
+                        {?>
+   
+              
+              <?php
+
+                             $ToUser=$postObj->FromUserName;
+                            $fromUser=$postObj->ToUserName;
+                            $time =time();
+                            $MsgType="继续玩 http://1.rose111.applinzi.com/guirenli/index.php";
+                          $content="";
+                            $template="<xml>  
+                      <ToUserName><![CDATA[%s]]></ToUserName>  
+                      <FromUserName><![CDATA[%s]]></FromUserName>  
+                       <CreateTime>%s</CreateTime>  
+                     <MsgType><![CDATA[text]]></MsgType>  
+                      <Content><![CDATA[%s]]></Content>    
+                     </xml>"; 
+                     $info=sprintf($template,$ToUser,$fromUser,$time,$MsgType,$content);
+                     echo $info; 
+                         }
+                }
+                  
+           
+        }
+}
+?>
+    <script>
+ 
+window.onload = function () {
+    var subscribe=<?php echo $sub;?>;
+ if(subscribe){
+  totalAmount += 500;        
+             View.saveStorage(5,totalAmount);
+             countTotalAmount.text(totalAmount);
+ }
+}
+    </script>
+
+<script src="js/jquery-2.1.4.js" type="text/javascript"></script>
+    <script src="js/app.js"></script>
+
+</html>
+
+
+

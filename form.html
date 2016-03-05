@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+form{
+    width:320px;          
+    margin:20px auto;
+    padding:10px;
+    /*border:1px solid #000;*/
+}
+form section {
+    overflow:hidden;     /*强制section包含表单控件及标注*/
+    padding-top:10px; 
+}   
+form section label{ /*表单控件的标注*/
+    width:80px;      
+    display:block;float:left; 
+    line-height:1.5em;font-size:16px;
+    font-family:'Droid Sans';
+    font-weight:600; 
+    /*clear:both;*/   
+}   
+form section input{
+    width:230px;       
+    float:left; padding:5px 4px;  
+    color:#000; font-size:14px;
+    box-shadow:1px 1px 3px #ccc;     
+    outline:none;                
+    border:1px solid #bbb7ae;
+    border-radius:8px;
+}   
+form section input[type="submit"] { 
+    width:100%; float:none;         
+    margin:10px 0 10px 0;
+    font-size:16px;
+    font-weight:800;
+    color:#fff;
+    background-color:#bbb7ae;
+    cursor:pointer; 
+}
+form > section:last-child{  /*form的子元素，最后一个是section元素的，居中提交按钮*/
+    text-align:center;
+}
+
+</style>
+<body>
+    <form action="process_form.php" method="post"> 
+        
+        <!--姓名控件-->
+        <section> 
+            <label for="user_name">姓名</label>
+            <input type="text" id="user_name" name="user_name" />                           
+        </section>
+        
+        <!--手机控件-->
+        <section> 
+            <label for="phone">手机</label> 
+            <input type="text" id="phone" name="phone" />                           
+        </section>
+
+        <!--收货地址控件-->
+        <section> 
+            <label for="address">收货地址</label>
+            <input type="text" id="address" name="address" placeholder="领取地址：高新区锦业二路六和园" />                           
+        </section>
+        
+        <!--邮编控件-->
+        <section> 
+            <label for="postcode">邮编</label>
+            <input type="text" id="postcode" name="postcode" />                           
+        </section>   
+ 
+        <!--提交按钮-->
+        <section> 
+            <input type="submit" value="提交" />
+        </section>
+    </form>
+</body>
+</html>
